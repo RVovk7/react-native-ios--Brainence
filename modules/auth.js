@@ -67,14 +67,14 @@ function handleErrors(response) {
 
 
 export function authCheck(id) {
-    return dispatch => {
-      dispatch(fetchBegin());
-      return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        .then(handleErrors)
-        .then(res => res.json())
-        .then(json => {
-     json ? dispatch(fetchSuccess(json)) : dispatch(fetchError('wrong id'))
-        })
-        .catch(error => dispatch(fetchError(error)));
-    };
-  }
+  return dispatch => {
+    dispatch(fetchBegin());
+    return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then(handleErrors)
+      .then(res => res.json())
+      .then(json => {
+        json ? dispatch(fetchSuccess(json)) : dispatch(fetchError('wrong id'))
+      })
+      .catch(error => dispatch(fetchError(error)));
+  };
+}

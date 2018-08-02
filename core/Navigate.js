@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 import Login from './Login';
 import Gallery from './Gallery';
@@ -11,8 +11,8 @@ const LogNavigate = createSwitchNavigator(
     initialRouteName: 'LoginScreen',
   }
 );
- export default class Navigate extends Component {
-  constructor(props){
+export default class Navigate extends Component {
+  constructor(props) {
     super(props)
     this.state = {
       isLogged: false
@@ -21,7 +21,7 @@ const LogNavigate = createSwitchNavigator(
   render() {
     return (
       <Fragment>
-       <LogNavigate />
+        <LogNavigate />
       </Fragment>
     );
   }

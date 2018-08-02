@@ -12,7 +12,7 @@ import authReducer from './auth';
 
 
 const rootReducer = combineReducers({
-    authReducer
+  authReducer
 });
 
 const logger = createLogger();
