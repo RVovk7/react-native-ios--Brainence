@@ -9,10 +9,14 @@ import {
   createLogger,
 } from 'redux-logger';
 import authReducer from './auth';
+import getAlbumReducer from './getAlbum';
+import getPhotoReducer from './getPhoto';
 
 
 const rootReducer = combineReducers({
-  authReducer
+  authReducer,
+  getAlbumReducer,
+  getPhotoReducer,
 });
 
 const logger = createLogger();

@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './modules';

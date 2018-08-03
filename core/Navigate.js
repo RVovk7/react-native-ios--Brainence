@@ -1,23 +1,23 @@
 import React, { Component, Fragment } from 'react';
-import { createSwitchNavigator } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import Login from './Login';
 import Gallery from './Gallery';
+import PhotosLists from '../components/PhotosLists';
+import Photo from '../components/Photo';
+const AppStack = createStackNavigator({ GalleryScreen: Gallery, PhotosListsScreen: PhotosLists, PhotoScreen: Photo });
+const AuthStack = createStackNavigator({ LoginScreen: Login });
+
 const LogNavigate = createSwitchNavigator(
   {
-    LoginScreen: Login,
-    GalleryScreen: Gallery,
+    App: AppStack,
+    Auth: AuthStack,
   },
   {
-    initialRouteName: 'LoginScreen',
+    initialRouteName: 'Auth',
   }
 );
 export default class Navigate extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLogged: false
-    }
-  }
+
   render() {
     return (
       <Fragment>

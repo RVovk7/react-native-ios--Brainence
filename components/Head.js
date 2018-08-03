@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-export default function Head({ user, logoutClick }) {
+import { StyleSheet, Text, View, Button } from 'react-native';
+export default function Head({ user, logoutClick, albumTitle }) {
   return (
     <View style={styles.headContainer} >
       <Text></Text>
-      <Text style={styles.userName}>{user}</Text>
+      <Text style={styles.userName}>{user && `Hi,${user}` || `${albumTitle.slice(0,14)}...` }</Text>
       <Button
         title="logout"
         color="red"
@@ -21,7 +21,7 @@ Head.propTypes = {
 
 const styles = StyleSheet.create({
   headContainer: {
-    margin: 20,
+    margin:3,
     borderColor: 'black',
     borderWidth: 2,
     flexDirection: 'row',
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   userName: {
-    fontSize: 35,
+    fontSize: 45,
   },
 });
