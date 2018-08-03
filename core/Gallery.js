@@ -52,4 +52,4 @@ const mapDispatchToProps = dispatch => ({
   getPhotos: () => dispatch(getPhoto()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Gallery)
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

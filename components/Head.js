@@ -9,7 +9,7 @@ export default function Head({ user, logoutClick, albumTitle }) {
       <Button
         title="logout"
         color="red"
-        accessibilityLabel="Learn more about this purple button"
+        accessibilityLabel="logoutButton"
         onPress={()=> logoutClick()}
       />
     </View>
