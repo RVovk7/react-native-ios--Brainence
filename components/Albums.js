@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        margin: 1,
     },
     album: {
 
