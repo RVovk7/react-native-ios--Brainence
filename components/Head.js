@@ -1,34 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View, Button } from 'react-native';
-export default function Head({ user, logoutClick, albumTitle }) {
-  return (
-    <View style={styles.headContainer} >
-      <Text></Text>
-      <Text style={styles.userName}>{user && `Hi,${user}` || `${albumTitle.slice(0,14)}...` }</Text>
-      <Button
-        title="logout"
-        color="red"
-        accessibilityLabel="logoutButton"
-        onPress={()=> logoutClick()}
-      />
-    </View>
-  )
+import {StyleSheet, Text, View, Button} from 'react-native';
+export default function Head({user, logoutClick, albumTitle}) {
+    return (
+        <View style={styles.headContainer}>
+            <Text></Text>
+            <Text style={styles.userName}>{user && `Hi,${user}` || `${albumTitle.slice(0, 14)}...`}</Text>
+            <Button
+                title="logout"
+                color="red"
+                accessibilityLabel="logoutButton"
+                onPress={() => logoutClick()}/>
+        </View>
+    )
 }
 Head.propTypes = {
-  user: PropTypes.string
+    logoutClick: PropTypes.func.isRequired,
+    user: PropTypes.string,
+    albumTitle: PropTypes.string
 }
 
 const styles = StyleSheet.create({
-  headContainer: {
-    margin:3,
-    borderColor: 'black',
-    borderWidth: 2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  userName: {
-    fontSize: 45,
-  },
+    headContainer: {
+        margin: 3,
+        borderColor: 'black',
+        borderWidth: 2,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    userName: {
+        fontSize: 45
+    }
 });
