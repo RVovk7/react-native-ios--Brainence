@@ -18,6 +18,7 @@ Albums.propTypes = {
 
 export default function Albums({albums, photos, navigate, logoutClick}) {
     const rand = Math.floor(Math.random() * 49);
+
     return (
         <ScrollView >
             <View style={styles.albumsContainer}>

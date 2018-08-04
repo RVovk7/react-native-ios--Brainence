@@ -60,7 +60,6 @@ export default class LoginPage extends Component {
 
                 <TextInput
                     style={styles.logInput}
-                    style={styles.logInput}
                     onChangeText={loginInput}
                     value={logID}/>
                 <Button

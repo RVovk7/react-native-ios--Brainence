@@ -20,7 +20,6 @@ export default class Photo extends Component {
                 }
             ]
         }
-        this.data = [];
     }
     componentDidMount() {
         this.getStoreData();
@@ -40,17 +39,14 @@ export default class Photo extends Component {
 
     setStoreData = async(uri) => {
         const {albumTitle} = this.props.navigation.state.params;
-        const {state: {
-                localImage
-            }, data} = this;
+        const {localImage} = this.state;
+
         try {
-            const newPhoto = data
-                .concat(localImage)
-                .filter(e => e.uri !== 'default');
-            newPhoto.push({
-                id: Date.now(),
-                uri
-            })
+            const newPhoto = localImage.filter(e => e.uri !== 'default');
+                newPhoto.push({
+                    id: Date.now(),
+                    uri
+                });
 
             await AsyncStorage.setItem(albumTitle, JSON.stringify(newPhoto));
             this.getStoreData();
@@ -106,7 +102,7 @@ export default class Photo extends Component {
                                     height: 180
                                 }}
                                     source={{
-                                    uri: a.uri
+                                    uri: a.uri || 'def'
                                 }}/>
                             </TouchableHighlight>
 

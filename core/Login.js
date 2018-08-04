@@ -25,9 +25,9 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state = []) => {
-    return {authStatus: state.authReducer};
-};
+const mapStateToProps = (state = []) => ({
+        authStatus: state.authReducer
+});
 
 const mapDispatchToProps = dispatch => ({
     auth: id => dispatch(authCheck(id))

@@ -6,6 +6,7 @@ import {
     ScrollView,
 } from 'react-native';
 import Head from './Head';
+
 export default function Photo(props) {
     const {photo, photoTitle, logoutClick} = props.navigation.state.params;
     return (
@@ -22,6 +23,7 @@ export default function Photo(props) {
         </Fragment>
     )
 }
+
 const styles = StyleSheet.create({
     photoContainer: {
         flex: 1,
