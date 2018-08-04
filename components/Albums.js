@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
     StyleSheet,
     Text,
@@ -8,6 +8,13 @@ import {
     ScrollView,
     TouchableHighlight
 } from 'react-native';
+
+Albums.propTypes = {
+    albums: PropTypes.array.isRequired,
+    photos: PropTypes.array.isRequired,
+    navigate: PropTypes.func.isRequired,
+    logoutClick: PropTypes.func.isRequired
+}
 
 export default function Albums({albums, photos, navigate, logoutClick}) {
     const rand = Math.floor(Math.random() * 49);
@@ -38,13 +45,6 @@ export default function Albums({albums, photos, navigate, logoutClick}) {
             </View>
         </ScrollView>
     )
-}
-
-Albums.propTypes = {
-    albums: PropTypes.array.isRequired,
-    photos: PropTypes.array.isRequired,
-    navigate: PropTypes.func.isRequired,
-    logoutClick: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

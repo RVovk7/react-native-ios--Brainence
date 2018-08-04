@@ -2,11 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {StyleSheet, Text, View, Button} from 'react-native';
 
+Head.propTypes = {
+    logoutClick: PropTypes.func.isRequired,
+    user: PropTypes.string,
+    albumTitle: PropTypes.string
+}
+
 export default function Head({user, logoutClick, albumTitle}) {
     return (
         <View style={styles.headContainer}>
             <Text></Text>
-            <Text style={styles.userName}>{user && `Hi,${user}` || `${albumTitle.slice(0, 12)}...`}</Text>
+            <Text style={styles.userName}>{user && `Hi,${user.slice(0, 12)}` || `${albumTitle.slice(0, 12)}...`}</Text>
             <Button
                 title="logout"
                 color="red"
@@ -14,12 +20,6 @@ export default function Head({user, logoutClick, albumTitle}) {
                 onPress={() => logoutClick()}/>
         </View>
     )
-}
-
-Head.propTypes = {
-    logoutClick: PropTypes.func.isRequired,
-    user: PropTypes.string,
-    albumTitle: PropTypes.string
 }
 
 const styles = StyleSheet.create({

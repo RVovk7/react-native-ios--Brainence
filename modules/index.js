@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk';
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import authReducer from './auth';
 import getMediaReducer from './getMedia';
 

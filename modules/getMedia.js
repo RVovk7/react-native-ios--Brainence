@@ -1,6 +1,6 @@
-const GET_ERROR = 'GET_PHOTO_ERROR';
 const GET_PHOTO_SUCCESS = 'GET_PHOTO_SUCCESS';
 const GET_ALBUM_SUCCESS = 'GET_ALBUM_SUCCESS';
+const GET_ERROR = 'GET_PHOTO_ERROR';
 
 const initialState = {
     albums: [],

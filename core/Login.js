@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {authCheck} from '../modules/auth';
 import LoginPage from '../components/LoginPage';
+
 class Login extends Component {
     static propTypes = {
         auth: PropTypes.func.isRequired
@@ -27,6 +28,7 @@ class Login extends Component {
 const mapStateToProps = (state = []) => {
     return {authStatus: state.authReducer};
 };
+
 const mapDispatchToProps = dispatch => ({
     auth: id => dispatch(authCheck(id))
 });

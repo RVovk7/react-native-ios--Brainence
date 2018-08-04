@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-} from 'react-native';
+import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
 
 export default class LoginPage extends Component {
     static propTypes = {
-        auth: PropTypes.func.isRequired
+        controledInput: PropTypes.func,
+        logClick: PropTypes.func,
+        parentState: PropTypes.string
     };
 
     constructor(props) {
@@ -23,7 +19,7 @@ export default class LoginPage extends Component {
     };
 
     logClick = () => {
-        const {props: { auth }, state: { logID }} = this;
+        const { props: { auth }, state: { logID }} = this;
 
         /[0-9]/g.test(logID) && + logID <= 10
             ? auth(logID)
@@ -37,7 +33,7 @@ export default class LoginPage extends Component {
     };
 
     loginInput = e => {
-            this.setState({logID: e})
+        this.setState({logID: e})
 
     };
 
@@ -47,18 +43,13 @@ export default class LoginPage extends Component {
     };
 
     render() {
-        const {state: { logID, logFail }, logClick, loginInput } = this;
+        const {  state: { logID, logFail }, logClick, loginInput } = this;
         return (
             <View style={styles.logMain}>
                 <Text
                     style={[
-                    {
-                        color: 'red'
-                    }, {
-                        opacity: logFail
-                            ? 100
-                            : 0
-                    }
+                    { color: 'red'}, 
+                    { opacity: logFail ? 100 : 0 }
                 ]}>
                     Only numeric from 1 to 10
                 </Text>
@@ -80,12 +71,6 @@ export default class LoginPage extends Component {
             </View>
         )
     }
-}
-
-LoginPage.propTypes = {
-    controledInput: PropTypes.func,
-    logClick: PropTypes.func,
-    parentState: PropTypes.string
 }
 
 const styles = StyleSheet.create({

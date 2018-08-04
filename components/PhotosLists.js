@@ -20,9 +20,10 @@ export default class Photo extends Component {
                 }
             ]
         }
+        this.data = [];
     }
     componentDidMount() {
-        this.getStoreData()
+     this.getStoreData();
     }
 
     askPermissionsAsync = async() => {
@@ -36,18 +37,21 @@ export default class Photo extends Component {
             this.setStoreData(uri);
         }
     }
+
     setStoreData = async(uri) => {
         const {albumTitle} = this.props.navigation.state.params;
-        const data = [];
-        data.push({
-            id: Date.now(),
-            uri
-        })
+        const { state: { localImage }, data } = this;
         try {
-            await AsyncStorage.setItem(albumTitle, JSON.stringify(data));
-            this.getStoreData()
+             const newPhoto = data.concat(localImage).filter(e=> e.uri !== 'default');  
+             newPhoto.push({
+                        id: Date.now(),
+                        uri
+                    })
+
+            await AsyncStorage.setItem(albumTitle, JSON.stringify(newPhoto));
+            this.getStoreData();
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
     }
 
@@ -61,7 +65,7 @@ export default class Photo extends Component {
                 })
             }
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
     }
 

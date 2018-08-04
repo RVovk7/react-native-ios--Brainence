@@ -1,6 +1,5 @@
-const AUTH_BEGIN = 'AUTH_BEGIN';
-const AUTH_ERROR = 'AUTH_ERROR';
 const AUTH_SUCCESS = 'AUTH_SUCCESS';
+const AUTH_ERROR = 'AUTH_ERROR';
 
 const initialState = {
     data: [],
