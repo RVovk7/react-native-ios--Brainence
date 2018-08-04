@@ -23,7 +23,7 @@ export default class Photo extends Component {
         this.data = [];
     }
     componentDidMount() {
-     this.getStoreData();
+        this.getStoreData();
     }
 
     askPermissionsAsync = async() => {
@@ -40,13 +40,17 @@ export default class Photo extends Component {
 
     setStoreData = async(uri) => {
         const {albumTitle} = this.props.navigation.state.params;
-        const { state: { localImage }, data } = this;
+        const {state: {
+                localImage
+            }, data} = this;
         try {
-             const newPhoto = data.concat(localImage).filter(e=> e.uri !== 'default');  
-             newPhoto.push({
-                        id: Date.now(),
-                        uri
-                    })
+            const newPhoto = data
+                .concat(localImage)
+                .filter(e => e.uri !== 'default');
+            newPhoto.push({
+                id: Date.now(),
+                uri
+            })
 
             await AsyncStorage.setItem(albumTitle, JSON.stringify(newPhoto));
             this.getStoreData();
@@ -77,7 +81,7 @@ export default class Photo extends Component {
                 <Head albumTitle={albumTitle} logoutClick={logoutClick}/>
                 <ScrollView >
                     <View style={styles.albumsContainer}>
-                       
+
                         <TouchableHighlight onPress={this.imagePicker}>
                             <Image
                                 style={{
