@@ -6,6 +6,6 @@ import getMediaReducer from './getMedia';
 const rootReducer = combineReducers({authReducer, getMediaReducer});
 const middleware = applyMiddleware(thunk);
 
-const Store = createStore(rootReducer, compose(middleware,),);
+const Store = createStore(rootReducer,middleware);
 
 export default Store;
