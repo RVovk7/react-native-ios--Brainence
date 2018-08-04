@@ -13,7 +13,7 @@ export default function Albums({albums, photos, navigate, logoutClick}) {
     return (
         <ScrollView >
             <View style={styles.albumsContainer}>
-                {albums.map(a => <View key={a.id} style={styles.album}>
+                {  albums.map(a => <View key={a.id} style={styles.album}>
                     <TouchableHighlight
                         onPress={() => navigate('PhotosListsScreen', {
                         styles: styles,
@@ -42,7 +42,7 @@ Albums.propTypes = {
     albums: PropTypes.array.isRequired,
     photos: PropTypes.array.isRequired,
     navigate: PropTypes.func.isRequired,
-    logoutClick: PropTypes.func.isRequired,
+    logoutClick: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

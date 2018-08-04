@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {
     StyleSheet,
@@ -20,8 +20,8 @@ export default class LoginPage extends Component {
             logID: '',
             logFail: false,
             timeClear: ''
-        }
-    }
+        };
+    };
 
     logClick = () => {
         const {props: { auth }, state: { logID }} = this;
@@ -35,17 +35,17 @@ export default class LoginPage extends Component {
         }, 1000);
         this.setState({timeClear})
 
-    }
+    };
 
     loginInput = e => {
             this.setState({logID: e})
 
-    }
+    };
 
     componentWillUnmount() {
         const {timeClear} = this.state;
         clearTimeout(timeClear);
-    }
+    };
     render() {
         const {state: { logID, logFail }, logClick, loginInput } = this;
         return (
@@ -66,6 +66,7 @@ export default class LoginPage extends Component {
                 <Text style={styles.logLabel}>
                     Enter your ID
                 </Text>
+                
                 <TextInput
                     style={styles.logInput}
                     style={styles.logInput}

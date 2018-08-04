@@ -1,14 +1,12 @@
 import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {getAlbums} from '../modules/getAlbum';
-import {getPhoto} from '../modules/getPhoto';
+import {getMedia} from '../modules/getMedia';
 import Head from '../components/Head';
 import Albums from '../components/Albums';
 export class Gallery extends Component {
     static propTypes = {
-        getAlbum: PropTypes.func.isRequired,
-        getPhotos: PropTypes.func.isRequired,
+        getMedia: PropTypes.func.isRequired,
         user: PropTypes.string,
         ID: PropTypes.number,
         albums: PropTypes.array,
@@ -21,9 +19,8 @@ export class Gallery extends Component {
             .navigate('Auth');
     }
     componentDidMount() {
-        const {ID, getAlbum, getPhotos} = this.props;
-        getAlbum(ID);
-        getPhotos();
+        const {ID, getMedia} = this.props;
+        getMedia(ID);
     }
 
     render() {
@@ -42,12 +39,16 @@ export class Gallery extends Component {
 }
 
 const mapStateToProps = (state = []) => {
-    return {user: state.authReducer.data.username, ID: state.authReducer.data.id, albums: state.getAlbumReducer.data, photos: state.getPhotoReducer.data};
+    return { 
+          user: state.authReducer.data.username,
+          ID: state.authReducer.data.id,
+          albums: state.getMediaReducer.albums,
+          photos: state.getMediaReducer.photos,
+        };
 };
 
-const mapDispatchToProps = dispatch => ({
-    getAlbum: id => dispatch(getAlbums(id)),
-    getPhotos: () => dispatch(getPhoto())
+const mapDispatchToProps =  dispatch => ({
+    getMedia: id => dispatch(getMedia(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

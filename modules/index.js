@@ -2,10 +2,9 @@ import thunk from 'redux-thunk';
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import {createLogger} from 'redux-logger';
 import authReducer from './auth';
-import getAlbumReducer from './getAlbum';
-import getPhotoReducer from './getPhoto';
+import getMediaReducer from './getMedia';
 
-const rootReducer = combineReducers({authReducer, getAlbumReducer, getPhotoReducer});
+const rootReducer = combineReducers({authReducer, getMediaReducer});
 
 const logger = createLogger();
 const middleware = applyMiddleware(thunk);

@@ -7,7 +7,7 @@ const initialState = {
     error: null,
     auth: false
 };
-
+// reducer
 export default function authReducer(state = initialState, action) {
     const {data} = action;
     switch (action.type) {
@@ -30,9 +30,8 @@ export default function authReducer(state = initialState, action) {
     }
 }
 
-// used by all actions
+// actions
 export const authSuccess = data => ({type: AUTH_SUCCESS, data});
-
 export const authError = error => ({type: AUTH_ERROR, error});
 
 function handleErrors(response) {

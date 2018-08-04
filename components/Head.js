@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     userName: {
-        fontSize: 45
+        fontSize: 45,
     }
 });
