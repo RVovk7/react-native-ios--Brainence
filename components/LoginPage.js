@@ -14,7 +14,6 @@ export default class LoginPage extends Component {
     };
 
     constructor(props) {
-
         super(props)
         this.state = {
             logID: '',
@@ -46,6 +45,7 @@ export default class LoginPage extends Component {
         const {timeClear} = this.state;
         clearTimeout(timeClear);
     };
+
     render() {
         const {state: { logID, logFail }, logClick, loginInput } = this;
         return (
@@ -66,7 +66,7 @@ export default class LoginPage extends Component {
                 <Text style={styles.logLabel}>
                     Enter your ID
                 </Text>
-                
+
                 <TextInput
                     style={styles.logInput}
                     style={styles.logInput}
@@ -78,11 +78,10 @@ export default class LoginPage extends Component {
                     color="black"
                     accessibilityLabel="loginButton"/>
             </View>
-
         )
     }
-
 }
+
 LoginPage.propTypes = {
     controledInput: PropTypes.func,
     logClick: PropTypes.func,

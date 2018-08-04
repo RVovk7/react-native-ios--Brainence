@@ -54,6 +54,7 @@ function handleErrors(response) {
  ///  fetch photo first then albums !important
 export function getMedia(id) {
     return dispatch => {
+        // fix photo overfetch if too slow
         return fetch(`https://jsonplaceholder.typicode.com/photos`)
             .then(handleErrors)
             .then(res => res.json())
@@ -72,6 +73,5 @@ function getAlbums(id) {
     return fetch(`https://jsonplaceholder.typicode.com/albums?userId=${id}`)
         .then(handleErrors)
         .then(res => res.json())
-        .then(res => res)
         .catch(error => dispatch(getError(error)));
 }

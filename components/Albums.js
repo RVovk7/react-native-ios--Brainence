@@ -8,6 +8,7 @@ import {
     ScrollView,
     TouchableHighlight
 } from 'react-native';
+
 export default function Albums({albums, photos, navigate, logoutClick}) {
     const rand = Math.floor(Math.random() * 49);
     return (
@@ -38,6 +39,7 @@ export default function Albums({albums, photos, navigate, logoutClick}) {
         </ScrollView>
     )
 }
+
 Albums.propTypes = {
     albums: PropTypes.array.isRequired,
     photos: PropTypes.array.isRequired,

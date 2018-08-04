@@ -5,42 +5,75 @@ import {
     Image,
     ScrollView,
     TouchableHighlight,
-    ImagePickerIOS,
     AsyncStorage
 } from 'react-native';
+import {Permissions, ImagePicker} from 'expo';
 import Head from './Head';
 export default class Photo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageAdd: false
+            localImage: [
+                {
+                    id: Date.now(),
+                    uri: 'default'
+                }
+            ]
         }
     }
-    imagePicker = () => {
-        const {photosList} = this.props.navigation.state.params;
-        ImagePickerIOS.openSelectDialog({
-            showImages: true
-        }, (imageUri) => {
-            photosList.push({
-                albumId: photosList.albumId,
-                id: Date.now(),
-                title: "new photo",
-                url: imageUri,
-                thumbnailUrl: imageUri
-            })
-            this.setState({
-                imageAdd: !this.state.imageAdd
-            })
-        }, m => console.log(m));
-
+    componentDidMount() {
+        this.getStoreData()
     }
+
+    askPermissionsAsync = async() => {
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    };
+
+    imagePicker = async() => {
+        await this.askPermissionsAsync();
+        const {cancelled, uri} = await ImagePicker.launchImageLibraryAsync({allowsEditing: true});
+        if (!cancelled) {
+            this.setStoreData(uri);
+        }
+    }
+    setStoreData = async(uri) => {
+        const {albumTitle} = this.props.navigation.state.params;
+        const data = [];
+        data.push({
+            id: Date.now(),
+            uri
+        })
+        try {
+            await AsyncStorage.setItem(albumTitle, JSON.stringify(data));
+            this.getStoreData()
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    getStoreData = async() => {
+        const {albumTitle} = this.props.navigation.state.params;
+        try {
+            const value = await AsyncStorage.getItem(albumTitle);
+            if (value !== null) {
+                this.setState({
+                    localImage: JSON.parse(value)
+                })
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     render() {
         const {photosList, styles, logoutClick, albumTitle, navigate} = this.props.navigation.state.params;
+        const {localImage} = this.state;
         return (
             <Fragment>
                 <Head albumTitle={albumTitle} logoutClick={logoutClick}/>
                 <ScrollView >
                     <View style={styles.albumsContainer}>
+                       
                         <TouchableHighlight onPress={this.imagePicker}>
                             <Image
                                 style={{
@@ -50,7 +83,27 @@ export default class Photo extends Component {
                                 source={{
                                 uri: 'https://cdn4.iconfinder.com/data/icons/ios7-essence/22/add_plus-512.png'
                             }}/>
+
                         </TouchableHighlight>
+                        {localImage[0].uri !== 'default' && localImage.map(a => <View key={a.id} style={styles.album}>
+                            <TouchableHighlight
+                                onPress={() => navigate('PhotoScreen', {
+                                photo: a.uri,
+                                photoTitle: 'new photo',
+                                logoutClick: logoutClick
+                            })}>
+                                <Image
+                                    style={{
+                                    width: 180,
+                                    height: 180
+                                }}
+                                    source={{
+                                    uri: a.uri
+                                }}/>
+                            </TouchableHighlight>
+
+                            <Text style={styles.albumName}>{a.title}</Text>
+                        </View>)}
                         {photosList.map(a => <View key={a.id} style={styles.album}>
                             <TouchableHighlight
                                 onPress={() => navigate('PhotoScreen', {
@@ -75,5 +128,4 @@ export default class Photo extends Component {
             </Fragment>
         )
     }
-
 }
