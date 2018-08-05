@@ -48,10 +48,10 @@ export const getAlbumSuccess = albums => ({type: GET_ALBUM_SUCCESS, albums});
 export const getError = error => ({type: GET_ERROR, error});
 
 
- ///  fetch photo first then albums !important
+ ///  fetch photo first then albums or set initial state !important
 export function getMedia(id) {
     return dispatch => {
-        return fetch(`${url}/photos`)
+        return fetch(`${url}/photos`)   // over-fetchr
             .then(handleErrors)
             .then(res => res.json())
             .then(json => {
