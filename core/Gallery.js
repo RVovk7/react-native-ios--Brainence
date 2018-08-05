@@ -7,10 +7,10 @@ import Albums from '../components/Albums';
 export class Gallery extends Component {
     static propTypes = {
         getMedia: PropTypes.func.isRequired,
-        user: PropTypes.string,
-        ID: PropTypes.number,
-        albums: PropTypes.array,
-        photos: PropTypes.array
+        user: PropTypes.string.isRequired,
+        ID: PropTypes.number.isRequired,
+        albums: PropTypes.array.isRequired,
+        photos: PropTypes.array.isRequired,
     }
     logoutClick = () => {
         this
