@@ -1,3 +1,5 @@
+import {url , handleErrors } from './config';
+
 const GET_PHOTO_SUCCESS = 'GET_PHOTO_SUCCESS';
 const GET_ALBUM_SUCCESS = 'GET_ALBUM_SUCCESS';
 const GET_ERROR = 'GET_PHOTO_ERROR';
@@ -45,17 +47,11 @@ export const getPhotoSuccess = photos => ({type: GET_PHOTO_SUCCESS, photos});
 export const getAlbumSuccess = albums => ({type: GET_ALBUM_SUCCESS, albums});
 export const getError = error => ({type: GET_ERROR, error});
 
-function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}
+
  ///  fetch photo first then albums !important
 export function getMedia(id) {
     return dispatch => {
-        // fix photo overfetch if too slow
-        return fetch(`https://jsonplaceholder.typicode.com/photos`)
+        return fetch(`${url}/photos`)
             .then(handleErrors)
             .then(res => res.json())
             .then(json => {
@@ -70,7 +66,7 @@ export function getMedia(id) {
 }
 
 function getAlbums(id) {
-    return fetch(`https://jsonplaceholder.typicode.com/albums?userId=${id}`)
+    return fetch(`${url}/albums?userId=${id}`)
         .then(handleErrors)
         .then(res => res.json())
         .catch(error => dispatch(getError(error)));

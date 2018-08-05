@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './modules';
-import Navigate from './core/Navigate';
+import Navigate from './navigation';
 
 export default function App() {
     return (

@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {createSwitchNavigator, createStackNavigator} from 'react-navigation';
-import Login from './Login';
-import Gallery from './Gallery';
+import Login from '../core/Login';
+import Gallery from '../core/Gallery';
 import PhotosLists from '../components/PhotosLists';
 import Photo from '../components/Photo';
 

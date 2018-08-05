@@ -1,6 +1,7 @@
+import {url , handleErrors } from './config';
+
 const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const AUTH_ERROR = 'AUTH_ERROR';
-
 const initialState = {
     data: [],
     error: null,
@@ -33,16 +34,11 @@ export default function authReducer(state = initialState, action) {
 export const authSuccess = data => ({type: AUTH_SUCCESS, data});
 export const authError = error => ({type: AUTH_ERROR, error});
 
-function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}
+
 
 export function authCheck(id) {
     return dispatch => {
-        return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+        return fetch(`${url}/users/${id}`)
             .then(handleErrors)
             .then(res => res.json())
             .then(json => {
