@@ -23,12 +23,10 @@ export default class LoginPage extends Component {
         }
   
      logClick = () => {
-        const {props: { auth }, state: { logID }} = this;
-
+        const {props: { auth }, state: { logID }, warningClear} = this;
+        
         /^\d+$/g.test(logID) ? auth(logID) : this.setState({logFail: true, userWarning:'only numeric'});
-            
-       
-        this.warningClear();
+        warningClear();
     };
 
     warningClear = () => {
