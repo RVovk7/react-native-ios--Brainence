@@ -1,4 +1,5 @@
-import {url , handleErrors } from './config';
+import {url } from './config';
+import {isEmpty} from 'lodash';
 
 const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const AUTH_ERROR = 'AUTH_ERROR';
@@ -22,7 +23,8 @@ export default function authReducer(state = initialState, action) {
             return {
                 ...state,
                 error: action.error,
-                data: []
+                data: [],
+                auth: false
             };
 
         default:
@@ -39,10 +41,9 @@ export const authError = error => ({type: AUTH_ERROR, error});
 export function authCheck(id) {
     return dispatch => {
         return fetch(`${url}/users/${id}`)
-            .then(handleErrors)
             .then(res => res.json())
             .then(json => {
-                json
+                !isEmpty(json)
                     ? dispatch(authSuccess(json))
                     : dispatch(authError('wrong id'))
             })

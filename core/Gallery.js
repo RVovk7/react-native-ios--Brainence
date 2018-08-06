@@ -13,10 +13,7 @@ export class Gallery extends Component {
         photos: PropTypes.array.isRequired,
     }
     logoutClick = () => {
-        this
-            .props
-            .navigation
-            .navigate('Auth');
+        this.props.navigation.navigate('Auth');
     }
     componentDidMount() {
         const {ID, getMedia} = this.props;

@@ -4,9 +4,8 @@ import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
 
 export default class LoginPage extends Component {
     static propTypes = {
-        controledInput: PropTypes.func,
-        logClick: PropTypes.func,
-        parentState: PropTypes.string
+        auth: PropTypes.func.isRequired,
+        userNotFound: PropTypes.bool.isRequired
     };
 
     constructor(props) {
@@ -14,27 +13,33 @@ export default class LoginPage extends Component {
         this.state = {
             logID: '',
             logFail: false,
-            timeClear: ''
+            userNotFound: false,
+            timeClear: '',
         };
     };
 
-    logClick = () => {
-        const { props: { auth }, state: { logID }} = this;
+    static getDerivedStateFromProps(nextProps) {
+        if (nextProps.userNotFound) return {logFail: true, userNotFound: true}
+        }
+  
+     logClick = () => {
+        const {props: { auth }, state: { logID }} = this;
 
-        /[0-9]/g.test(logID) && + logID <= 10
-            ? auth(logID)
-            : this.setState({logFail: true});
-
-        const timeClear = setTimeout(() => {
-            this.setState({logFail: false, logID: ''})
-        }, 1000);
-        this.setState({timeClear})
-
+        /^\d+$/g.test(logID) ? auth(logID) : this.setState({logFail: true});
+            
+        this.setState({logID: ''});
+        this.warning();
     };
+
+    warning = () => {
+        const timeClear = setTimeout(() => {
+            this.setState({logFail: false, userNotFound: false})
+        }, 2000);
+        this.setState({timeClear})
+    }
 
     loginInput = e => {
         this.setState({logID: e})
-
     };
 
     componentWillUnmount() {
@@ -43,25 +48,18 @@ export default class LoginPage extends Component {
     };
 
     render() {
-        const {  state: { logID, logFail }, logClick, loginInput } = this;
+        const { state: { logID, logFail, userNotFound }, logClick, loginInput } = this;
         return (
             <View style={styles.logMain}>
-                <Text
-                    style={[
-                    { color: 'red'}, 
-                    { opacity: logFail ? 100 : 0 }
-                ]}>
-                    Only numeric from 1 to 10
+                <Text style={[ { color: 'red' }, { opacity: logFail ? 100 : 0 }  ]}>
+                    {userNotFound ? 'User not found' : 'Only numeric'}
                 </Text>
 
                 <Text style={styles.logLabel}>
                     Enter your ID
                 </Text>
 
-                <TextInput
-                    style={styles.logInput}
-                    onChangeText={loginInput}
-                    value={logID}/>
+                <TextInput style={styles.logInput} onChangeText={loginInput} value={logID}/>
                 <Button
                     onPress={logClick}
                     title="Sign In"

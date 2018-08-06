@@ -9,15 +9,28 @@ class Login extends Component {
         auth: PropTypes.func.isRequired
     };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.authStatus.auth) {
-            this.props.navigation.navigate('GalleryScreen');
+    constructor(props){
+        super(props)
+        this.state ={
+            userNotFound: false
         }
     }
 
+    static getDerivedStateFromProps(nextProps) {
+        if (nextProps.authStatus.auth) return { userNotFound: false };
+        if (nextProps.authStatus.error) return { userNotFound: true };
+    }
+
+    componentDidUpdate(){
+        const {authStatus } = this.props;
+        if (authStatus.auth) {
+            this.props.navigation.navigate('GalleryScreen');
+    }  
+      }
+
     render() {
-        const {auth} = this.props;
-        return (<LoginPage auth={auth}/>)
+        const { state:{userNotFound}, props:{auth}} = this;
+        return (<LoginPage auth={auth} userNotFound={userNotFound}/>)
     }
 }
 
