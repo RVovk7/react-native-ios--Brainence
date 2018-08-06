@@ -11,11 +11,7 @@ class Login extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.authStatus.auth) {
-            this
-                .props
-                .navigation
-                .navigate('GalleryScreen');
-            this.setState({logID: ''})
+            this.props.navigation.navigate('GalleryScreen');
         }
     }
 
