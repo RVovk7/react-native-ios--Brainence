@@ -13,25 +13,26 @@ export default class LoginPage extends Component {
         this.state = {
             logID: '',
             logFail: false,
-            userNotFound: false,
+            userWarning: '',
             timeClear: '',
         };
     };
 
     static getDerivedStateFromProps(nextProps) {
-        if (nextProps.userNotFound) return {logFail: true, userNotFound: true}
+        if (nextProps.userNotFound) return {logFail: true, userWarning:' user not found'}
         }
   
      logClick = () => {
         const {props: { auth }, state: { logID }} = this;
 
-        /^\d+$/g.test(logID) ? auth(logID) : this.setState({logFail: true});
+        /^\d+$/g.test(logID) ? auth(logID) : this.setState({logFail: true, userWarning:'only numeric'});
             
-        this.setState({logID: ''});
-        this.warning();
+       
+        this.warningClear();
     };
 
-    warning = () => {
+    warningClear = () => {
+        this.setState({logID: ''});
         const timeClear = setTimeout(() => {
             this.setState({logFail: false, userNotFound: false})
         }, 2000);
@@ -48,11 +49,11 @@ export default class LoginPage extends Component {
     };
 
     render() {
-        const { state: { logID, logFail, userNotFound }, logClick, loginInput } = this;
+        const { state: { logID, logFail, userWarning }, logClick, loginInput } = this;
         return (
             <View style={styles.logMain}>
                 <Text style={[ { color: 'red' }, { opacity: logFail ? 100 : 0 }  ]}>
-                    {userNotFound ? 'User not found' : 'Only numeric'}
+                    {userWarning}
                 </Text>
 
                 <Text style={styles.logLabel}>
