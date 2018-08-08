@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {StyleSheet, Text, View, Button} from 'react-native';
+import ScalableText from 'react-native-text';
 
 Head.propTypes = {
     logoutClick: PropTypes.func.isRequired,
@@ -12,7 +13,10 @@ export default function Head({user, logoutClick, albumTitle}) {
     return (
         <View style={styles.headContainer}>
             <Text></Text>
-            <Text style={styles.userName}>{user && `Hi,${user.slice(0, 12)}` || `${albumTitle.slice(0, 12)}...`}</Text>
+            <Text
+            adjustsFontSizeToFit
+             minimumFontScale={2.5}
+             style={!user && styles.albumTitle}>{user && `Hi,${user}` || `${albumTitle}`}</Text>
             <Button
                 title="logout"
                 color="red"
@@ -31,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    userName: {
-        fontSize: 45,
+    albumTitle: {
+        width: 300,
     }
 });
